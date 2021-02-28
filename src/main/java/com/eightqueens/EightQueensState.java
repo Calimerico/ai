@@ -45,8 +45,7 @@ public class EightQueensState implements State {
     public State newState(Action action) {
         EightQueensAction a = (EightQueensAction) action;
         boolean[][] newBoard = new boolean[8][8];
-        for(int i = 0; i < board.length; i++)
-        {
+        for(int i = 0; i < board.length; i++) {
             boolean[] aMatrix = board[i];
             int   aLength = aMatrix.length;
             newBoard[i] = new boolean[aLength];

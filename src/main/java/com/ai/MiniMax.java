@@ -8,50 +8,57 @@ public class MiniMax {
 
     private double alpha = Double.MIN_VALUE;//best found for max
     private double beta = Double.MAX_VALUE;//best found for min
-    private ArrayDeque<Node> queue = new ArrayDeque<>();
-    private Path path = new Path();
-    private EvaluationFunction evaluationFunction;
     private BreakTest breakTest;
 
-    public MiniMax(EvaluationFunction evaluationFunction, BreakTest breakTest) {
-        this.evaluationFunction = evaluationFunction;
+    public MiniMax(BreakTest breakTest) {
         this.breakTest = breakTest;
     }
 
 
     public Action search(MiniMaxState state) {
-        return search(state, 10);
+        long millis = System.currentTimeMillis();
+        Action search = search(state, 6);
+        return search;
     }
 
-    private double search(MiniMaxState state, int depth) {
-        if (breakTest.shouldEvaluate(state, depth)) {
-            return state.getHeuristicFunction();
-        }
+    private Action search(MiniMaxState state, int depth) {
+        Action act = null;
         if (state.maxPlayer()) {
             double max = Double.MIN_VALUE;
-            Action act = null;
             for (Action action : state.getActions()) {
-                double eval = search(((MiniMaxState) state.newState(action)), depth - 1);
+                double eval = min(((MiniMaxState) state.newState(action)), depth - 1);
                 if (eval > max) {
                     max = eval;
                     act = action;
                 }
-
             }
-            path.add(new Node());
-            return max;
+        } else {
+            double min = Double.MAX_VALUE;
+            for (Action action : state.getActions()) {
+                double eval = max(((MiniMaxState) state.newState(action)), depth - 1);
+                if (eval > min) {
+                    min = eval;
+                    act = action;
+                }
+            }
         }
+        return act;
     }
 
-    private Map.Entry<Action, Double> max(MiniMaxState state, int depth) {
-
+    private double max(MiniMaxState state, int depth) {
+        if (breakTest.shouldEvaluate(state, depth)) {
+            return state.getHeuristicFunction();
+        }
         double max = Double.MIN_VALUE;
         for (Action action : state.getActions()) {
-            double newStateValue = state.newState(action).getHeuristicFunction();
+            double newStateValue = min(((MiniMaxState) state.newState(action)), depth - 1);
             if (newStateValue >= beta) {
                 return newStateValue;
             }
-            max = Math.max(max, newStateValue);
+            if (newStateValue > max) {
+                max = newStateValue;
+                alpha = max;
+            }
         }
         return max;
     }
@@ -62,11 +69,14 @@ public class MiniMax {
         }
         double min = Double.MAX_VALUE;
         for (Action action : state.getActions()) {
-            double newStateValue = state.newState(action).getHeuristicFunction();
+            double newStateValue = max(((MiniMaxState) state.newState(action)), depth - 1);
             if (newStateValue <= alpha) {
                 return newStateValue;
             }
-            min = Math.min(min, newStateValue);
+            if (newStateValue < min) {
+                min = newStateValue;
+                beta = min;
+            }
         }
         return min;
     }

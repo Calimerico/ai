@@ -20,9 +20,9 @@ public class Neuron {
 
     public double getOutput() {
         double output = bias;
-        for(int i = 0 ; i< previousLayer.getNeurons().size() ; i++) {
-            output += previousLayer.getNeurons().get(i).getOutput() * weights.get(i);
-        }
+//        for(int i = 0 ; i< previousLayer.getNeurons().size() ; i++) {
+//            output += previousLayer.getNeurons().get(i).getOutput() * weights.get(i);
+//        }
         return output;
     }
 

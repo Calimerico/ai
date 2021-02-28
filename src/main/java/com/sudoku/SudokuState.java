@@ -47,16 +47,16 @@ public class SudokuState implements State {
 
     @Override
     public State newState(Action action) {
-        SudokuAction<Integer> sudokuAction = (SudokuAction<Integer>) action;
-        SudokuState state = (SudokuState) deepCopy();
-        for (CBPVariable<Integer>[] row : sudokuVariables) {
-            for (CBPVariable<Integer> variable : row) {
-                if (variable.getVariableName().equals(sudokuAction.getVariableName())) {
-                    variable.assignDomainValue(sudokuAction.getDomainValue());
-                }
-            }
-        }
-        return state;
+//        SudokuAction<Integer> sudokuAction = (SudokuAction<Integer>) action;
+//        SudokuState state = (SudokuState) deepCopy();
+//        for (CBPVariable<Integer>[] row : sudokuVariables) {
+//            for (CBPVariable<Integer> variable : row) {
+//                if (variable.getVariableName().equals(sudokuAction.getVariableName())) {
+//                    variable.assignDomainValue(sudokuAction.getDomainValue());
+//                }
+//            }
+//        }
+        return null;//todo
     }
 
     @Override

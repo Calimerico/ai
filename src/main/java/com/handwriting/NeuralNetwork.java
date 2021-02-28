@@ -18,8 +18,8 @@ public class NeuralNetwork {
             } else {
                 previousLayer = layers.get(layers.size() - 1);
             }
-            layers.add(new Layer(numberOfNeuronsInLayer.get(i), previousLayer));
-            previousLayer.set
+//            layers.add(new Layer(numberOfNeuronsInLayer.get(i), previousLayer));
+//            previousLayer.set
         }
         this.costFunction = costFunction;
         this.optimizer = optimizer;

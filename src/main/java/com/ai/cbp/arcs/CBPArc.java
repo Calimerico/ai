@@ -36,9 +36,9 @@ public class CBPArc<T> {
     private boolean shouldRemoveDomain(List<CBPVariable<T>> variables) {
         CBPVariable<T> currentVariable = variables.get(0);
         List<CBPDomainValue<T>> domainValues = currentVariable.getDomain().getDomainValues();
-        if (variables.isEmpty()) {
-            return true;
-        }
+//        if (variables.isEmpty()) {
+//            return true;
+//        }
 
         if (variables.size() == 1) {
             for (CBPDomainValue<T> domainValue : domainValues) {

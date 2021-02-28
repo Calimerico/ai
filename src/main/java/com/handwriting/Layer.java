@@ -12,7 +12,7 @@ public class Layer {
     public Layer(int numberOfNeurons, Layer previousLayer, Layer nextLayer) {
         this.neurons = new ArrayList<>(numberOfNeurons);
         for (int i = 0; i < numberOfNeurons; i++) {
-            neurons.add(new Neuron(previousLayer));
+//            neurons.add(new Neuron(previousLayer));
         }
     }
 
