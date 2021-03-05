@@ -17,4 +17,9 @@ public class DummyAction implements Action {
                 "add=" + add +
                 '}';
     }
+
+    @Override
+    public int compareTo(Action o) {
+        return 0;
+    }
 }

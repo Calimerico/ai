@@ -1,8 +1,10 @@
 package com.ai;
 
 import com.romania.RomaniaState;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import java.util.*;
+import java.util.concurrent.*;
 
 public class MiniMax {
 
@@ -49,7 +51,7 @@ public class MiniMax {
         if (breakTest.shouldEvaluate(state, depth)) {
             return state.getHeuristicFunction();
         }
-        double max = Double.MIN_VALUE;
+        double max = -1 * Double.MAX_VALUE;
         for (Action action : state.getActions()) {
             double newStateValue = min(((MiniMaxState) state.newState(action)), depth - 1);
             if (newStateValue >= beta) {
