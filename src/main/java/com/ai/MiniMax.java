@@ -38,7 +38,7 @@ public class MiniMax {
             double min = Double.MAX_VALUE;
             for (Action action : state.getActions()) {
                 double eval = max(((MiniMaxState) state.newState(action)), depth - 1);
-                if (eval > min) {
+                if (eval < min) {
                     min = eval;
                     act = action;
                 }
