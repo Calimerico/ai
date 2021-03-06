@@ -19,9 +19,7 @@ public class MiniMax {
 
 
     public Action search(MiniMaxState state) {
-        long millis = System.currentTimeMillis();
-        Action search = search(state, 6);
-        return search;
+        return search(state, 6);
     }
 
     private Action search(MiniMaxState state, int depth) {
@@ -39,13 +37,6 @@ public class MiniMax {
                 );
             }
             double max = -1 * Double.MAX_VALUE;
-            for (ImmutablePair<Action, Future<Double>> evaluation : evaluations) {
-                try {
-                    System.out.println(evaluation.getLeft() + ": " + evaluation.getRight().get());
-                } catch (InterruptedException | ExecutionException e) {
-                    e.printStackTrace();
-                }
-            }
             for (ImmutablePair<Action, Future<Double>> evaluation : evaluations) {
                 Double eval = null;
                 try {
