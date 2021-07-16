@@ -33,21 +33,13 @@ public class CBPArc<T> {
     private boolean shouldRemoveDomainValue(List<CBPVariable<T>> variables) {
         CBPVariable<T> currentVariable = variables.get(0);
         List<T> domainValues = currentVariable.getDomain();
-
-        if (variables.size() == 1) {
-            for (T domainValue : domainValues) {
-                currentVariable.assignDomainValue(domainValue);
-                boolean violated = constraint.violated(this.variables.stream().map(CBPVariable::getAssignedValue).collect(Collectors.toList()));
-                if (!violated) {
-                    return false;
-                }
-            }
-            return true;
-        }
         for (T domainValue : domainValues) {
             currentVariable.assignDomainValue(domainValue);
             boolean violated = constraint.violated(this.variables.stream().map(CBPVariable::getAssignedValue).limit(this.variables.size() - (variables.size() - 1)).collect(Collectors.toList()));
             if (!violated) {
+                if (variables.size() == 1) {
+                    return false;
+                }
                 boolean shouldRemoveDomainFromVariable = shouldRemoveDomainValue(variables.subList(1, variables.size()));
                 if (!shouldRemoveDomainFromVariable) {
                     return false;
