@@ -14,11 +14,11 @@ public class AC3Algorithm <T> implements Algorithm {
         constraintWithVariables.forEach(cwv -> arcs.addAll(cwv.getArcs()));
         List<CBPArc<T>> agenda = new ArrayList<>(arcs);
         while (!agenda.isEmpty()) {
-            CBPArc<T> currentAgenda = agenda.get(0);
-            boolean variableDomainChanged = currentAgenda.execute();
+            CBPArc<T> currentArc = agenda.get(0);
+            boolean variableDomainChanged = currentArc.execute();
             if (variableDomainChanged) {
                 for (CBPArc<T> arc : arcs) {
-                    if (arc.variableOnTheRightSide(currentAgenda.getFirstVariableName()) && !agenda.contains(arc)) {
+                    if (arc.variableOnTheRightSide(currentArc.getFirstVariableName()) && !agenda.contains(arc)) {
                         agenda.add(arc);
                     }
                 }

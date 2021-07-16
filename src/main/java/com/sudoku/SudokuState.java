@@ -2,25 +2,22 @@ package com.sudoku;
 
 import com.ai.Action;
 import com.ai.State;
-import com.ai.cbp.CBPIntegerVariable;
 import com.ai.cbp.CBPVariable;
-import lombok.AllArgsConstructor;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class SudokuState implements State {
 
-    private CBPVariable<Integer>[][] sudokuVariables;
+    private final CBPVariable<Integer>[][] sudokuVariables;
 
     private SudokuState(CBPVariable<Integer>[][] sudokuVariables) {
         this.sudokuVariables = sudokuVariables;
     }
 
     public SudokuState(List<CBPVariable<Integer>> sudokuVariables) {
-        this.sudokuVariables = new CBPIntegerVariable[9][9];
+        this.sudokuVariables = new CBPVariable[9][9];
         for (CBPVariable<Integer> sudokuVariable : sudokuVariables) {
             char[] chars = sudokuVariable.getVariableName().toCharArray();
             int column = Character.getNumericValue(chars[0]);
@@ -66,7 +63,7 @@ public class SudokuState implements State {
 
     @Override
     public State deepCopy() {
-        CBPVariable<Integer>[][] sudokuVariables = new CBPIntegerVariable[9][9];
+        CBPVariable<Integer>[][] sudokuVariables = new CBPVariable[9][9];
         for (int i =0 ; i < sudokuVariables.length ; i++) {
             for (int j =0 ; j < sudokuVariables.length ; j++) {
                 sudokuVariables[i][j] = this.sudokuVariables[i][j].deepCopy();

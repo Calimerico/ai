@@ -78,24 +78,6 @@ public class CBPArc<T> {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CBPArc<?> cbpArc = (CBPArc<?>) o;
-        for (int i = 0 ; i < variables.size() ; i++) {
-            if (!variables.get(i).getVariableName().equals(cbpArc.variables.get(i).getVariableName())) {
-                return false;
-            }
-        }
-        return constraint.getClass().equals(cbpArc.constraint.getClass());
-    }
-
-    @Override
-    public int hashCode() {
-        return 0;
-    }
-
-    @Override
     public String toString() {
         String symbol = constraint.getSymbol();
         List<String> variableNames = variables.stream().map(variable -> variable.getVariableName() + symbol).collect(Collectors.toList());

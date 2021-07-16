@@ -1,10 +1,8 @@
 package com;
 
-import com.ai.cbp.CBPIntegerVariable;
+import com.ai.cbp.CBPVariable;
 import com.ai.cbp.arcs.CBPArc;
-import com.ai.cbp.constraints.IntegerEqualsConstraint;
 import com.ai.cbp.constraints.IntegerGreaterThenConstraint;
-import com.ai.cbp.constraints.IntegerLessThenConstraint;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,8 +19,8 @@ public class ArcTest {
         domainValues.add(1);
         domainValues.add(2);
         domainValues.add(3);
-        CBPIntegerVariable variableA = new CBPIntegerVariable("A", domainValues);
-        CBPIntegerVariable variableB = new CBPIntegerVariable("B", domainValues);
+        CBPVariable<Integer> variableA = new CBPVariable<>("A", domainValues);
+        CBPVariable<Integer> variableB = new CBPVariable<>("B", domainValues);
         variableA.removeDomainValue(1);
         variableB.removeDomainValue(3);
         // a > b

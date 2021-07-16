@@ -1,8 +1,6 @@
 package com.ai.cbp.arcs;
 
 import com.ai.cbp.CBPVariable;
-import com.ai.cbp.constraints.AllDifferentConstraint;
-import com.ai.cbp.constraints.IntegerEqualsConstraint;
 import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ public class AllDifferentConstraintWithVariables implements ConstraintWithVariab
                     .filter(v -> !variable.equals(v))
                     .collect(Collectors.toCollection(LinkedList::new));
             variablesWithoutCurrent.addFirst(variable);
-            arcs.add(new CBPArc<>(variablesWithoutCurrent,new AllDifferentConstraint<>()));
+            arcs.add(new CBPArc<>(variablesWithoutCurrent,new com.ai.cbp.constraints.AllDifferentConstraint<>()));
         });
         return arcs;
     }

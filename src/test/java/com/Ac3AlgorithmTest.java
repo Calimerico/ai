@@ -2,17 +2,11 @@ package com;
 
 import com.ai.cbp.*;
 import com.ai.cbp.arcs.*;
-import com.ai.cbp.constraints.AllDifferentConstraint;
-import com.ai.cbp.constraints.IntegerEqualsConstraint;
-import com.ai.cbp.constraints.IntegerGreaterThenConstraint;
-import com.ai.cbp.constraints.IntegerLessThenConstraint;
 import com.sudoku.SudokuState;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,9 +25,9 @@ public class Ac3AlgorithmTest {
         domainValues.add(2);
         domainValues.add(3);
 
-        CBPIntegerVariable variableA = new CBPIntegerVariable("A", domainValues);
-        CBPIntegerVariable variableB = new CBPIntegerVariable("B", domainValues);
-        CBPIntegerVariable variableC = new CBPIntegerVariable("C", domainValues);
+        CBPVariable<Integer> variableA = new CBPVariable<>("A", domainValues);
+        CBPVariable<Integer> variableB = new CBPVariable<>("B", domainValues);
+        CBPVariable<Integer> variableC = new CBPVariable<>("C", domainValues);
 
         List<ConstraintWithVariables<Integer>> constraintWithVariables = new ArrayList<>();
         // a > b
@@ -69,11 +63,11 @@ public class Ac3AlgorithmTest {
         domainValues.add(3);
         domainValues.add(4);
 
-        CBPIntegerVariable variableA = new CBPIntegerVariable("A", domainValues);
-        CBPIntegerVariable variableB = new CBPIntegerVariable("B", domainValues);
-        CBPIntegerVariable variableC = new CBPIntegerVariable("C", domainValues);
-        CBPIntegerVariable variableD = new CBPIntegerVariable("D", domainValues);
-        CBPIntegerVariable variableE = new CBPIntegerVariable("E", domainValues);
+        CBPVariable<Integer> variableA = new CBPVariable<Integer>("A", domainValues);
+        CBPVariable<Integer> variableB = new CBPVariable<Integer>("B", domainValues);
+        CBPVariable<Integer> variableC = new CBPVariable<Integer>("C", domainValues);
+        CBPVariable<Integer> variableD = new CBPVariable<Integer>("D", domainValues);
+        CBPVariable<Integer> variableE = new CBPVariable<Integer>("E", domainValues);
 
 
         List<ConstraintWithVariables<Integer>> constraintWithVariables = new ArrayList<>();
@@ -120,37 +114,37 @@ public class Ac3AlgorithmTest {
         //in resources there is sudokuHard.png picture that represents this sudoku
         List<CBPVariable<Integer>> variables = new ArrayList<>();
 
-        variables.add(new CBPIntegerVariable("7 1",asList(4)));
+        variables.add(new CBPVariable<Integer>("7 1",asList(4)));
 
-        variables.add(new CBPIntegerVariable("1 2",asList(7)));
-        variables.add(new CBPIntegerVariable("4 2",asList(2)));
-        variables.add(new CBPIntegerVariable("6 2",asList(3)));
+        variables.add(new CBPVariable<Integer>("1 2",asList(7)));
+        variables.add(new CBPVariable<Integer>("4 2",asList(2)));
+        variables.add(new CBPVariable<Integer>("6 2",asList(3)));
 
-        variables.add(new CBPIntegerVariable("5 3",asList(9)));
-        variables.add(new CBPIntegerVariable("6 3",asList(1)));
-        variables.add(new CBPIntegerVariable("7 3",asList(6)));
+        variables.add(new CBPVariable<Integer>("5 3",asList(9)));
+        variables.add(new CBPVariable<Integer>("6 3",asList(1)));
+        variables.add(new CBPVariable<Integer>("7 3",asList(6)));
 
-        variables.add(new CBPIntegerVariable("7 4",asList(7)));
+        variables.add(new CBPVariable<Integer>("7 4",asList(7)));
 
-        variables.add(new CBPIntegerVariable("2 5",asList(1)));
-        variables.add(new CBPIntegerVariable("3 5",asList(6)));
-        variables.add(new CBPIntegerVariable("4 5",asList(4)));
-        variables.add(new CBPIntegerVariable("5 5",asList(3)));
+        variables.add(new CBPVariable<Integer>("2 5",asList(1)));
+        variables.add(new CBPVariable<Integer>("3 5",asList(6)));
+        variables.add(new CBPVariable<Integer>("4 5",asList(4)));
+        variables.add(new CBPVariable<Integer>("5 5",asList(3)));
 
-        variables.add(new CBPIntegerVariable("1 6",asList(9)));
-        variables.add(new CBPIntegerVariable("4 6",asList(5)));
-        variables.add(new CBPIntegerVariable("9 6",asList(2)));
+        variables.add(new CBPVariable<Integer>("1 6",asList(9)));
+        variables.add(new CBPVariable<Integer>("4 6",asList(5)));
+        variables.add(new CBPVariable<Integer>("9 6",asList(2)));
 
-        variables.add(new CBPIntegerVariable("1 7",asList(5)));
-        variables.add(new CBPIntegerVariable("9 7",asList(1)));
+        variables.add(new CBPVariable<Integer>("1 7",asList(5)));
+        variables.add(new CBPVariable<Integer>("9 7",asList(1)));
 
-        variables.add(new CBPIntegerVariable("2 8",asList(7)));
-        variables.add(new CBPIntegerVariable("5 8",asList(5)));
-        variables.add(new CBPIntegerVariable("7 8",asList(3)));
-        variables.add(new CBPIntegerVariable("9 8",asList(9)));
+        variables.add(new CBPVariable<Integer>("2 8",asList(7)));
+        variables.add(new CBPVariable<Integer>("5 8",asList(5)));
+        variables.add(new CBPVariable<Integer>("7 8",asList(3)));
+        variables.add(new CBPVariable<Integer>("9 8",asList(9)));
 
-        variables.add(new CBPIntegerVariable("3 9",asList(9)));
-        variables.add(new CBPIntegerVariable("5 9",asList(7)));
+        variables.add(new CBPVariable<Integer>("3 9",asList(9)));
+        variables.add(new CBPVariable<Integer>("5 9",asList(7)));
 
         List<ConstraintWithVariables<Integer>> constraintWithVariables = new ArrayList<>();
 
@@ -159,7 +153,7 @@ public class Ac3AlgorithmTest {
             for (int j = 1; j < 10; j++) {
                 String variableName = String.valueOf(i) + " " + String.valueOf(j);
                 if (!variables.stream().map(CBPVariable::getVariableName).collect(Collectors.toList()).contains(variableName)) {
-                    variables.add(new CBPIntegerVariable(variableName, asList(1,2,3,4,5,6,7,8,9)));
+                    variables.add(new CBPVariable<Integer>(variableName, asList(1,2,3,4,5,6,7,8,9)));
                 }
             }
         }
@@ -186,46 +180,46 @@ public class Ac3AlgorithmTest {
         //sudoku primer can be found in AI Modern Approach book on page 234
         List<CBPVariable<Integer>> variables = new ArrayList<>();
 
-        variables.add(new CBPIntegerVariable("3 1",asList(3)));
-        variables.add(new CBPIntegerVariable("5 1",asList(2)));
-        variables.add(new CBPIntegerVariable("7 1",asList(6)));
+        variables.add(new CBPVariable<Integer>("3 1",asList(3)));
+        variables.add(new CBPVariable<Integer>("5 1",asList(2)));
+        variables.add(new CBPVariable<Integer>("7 1",asList(6)));
 
-        variables.add(new CBPIntegerVariable("1 2",asList(9)));
-        variables.add(new CBPIntegerVariable("4 2",asList(3)));
-        variables.add(new CBPIntegerVariable("6 2",asList(5)));
-        variables.add(new CBPIntegerVariable("9 2",asList(1)));
+        variables.add(new CBPVariable<Integer>("1 2",asList(9)));
+        variables.add(new CBPVariable<Integer>("4 2",asList(3)));
+        variables.add(new CBPVariable<Integer>("6 2",asList(5)));
+        variables.add(new CBPVariable<Integer>("9 2",asList(1)));
 
-        variables.add(new CBPIntegerVariable("3 3",asList(1)));
-        variables.add(new CBPIntegerVariable("4 3",asList(8)));
-        variables.add(new CBPIntegerVariable("6 3",asList(6)));
-        variables.add(new CBPIntegerVariable("7 3",asList(4)));
+        variables.add(new CBPVariable<Integer>("3 3",asList(1)));
+        variables.add(new CBPVariable<Integer>("4 3",asList(8)));
+        variables.add(new CBPVariable<Integer>("6 3",asList(6)));
+        variables.add(new CBPVariable<Integer>("7 3",asList(4)));
 
-        variables.add(new CBPIntegerVariable("3 4",asList(8)));
-        variables.add(new CBPIntegerVariable("4 4",asList(1)));
-        variables.add(new CBPIntegerVariable("6 4",asList(2)));
-        variables.add(new CBPIntegerVariable("7 4",asList(9)));
+        variables.add(new CBPVariable<Integer>("3 4",asList(8)));
+        variables.add(new CBPVariable<Integer>("4 4",asList(1)));
+        variables.add(new CBPVariable<Integer>("6 4",asList(2)));
+        variables.add(new CBPVariable<Integer>("7 4",asList(9)));
 
-        variables.add(new CBPIntegerVariable("1 5",asList(7)));
-        variables.add(new CBPIntegerVariable("9 5",asList(8)));
+        variables.add(new CBPVariable<Integer>("1 5",asList(7)));
+        variables.add(new CBPVariable<Integer>("9 5",asList(8)));
 
-        variables.add(new CBPIntegerVariable("3 6",asList(6)));
-        variables.add(new CBPIntegerVariable("4 6",asList(7)));
-        variables.add(new CBPIntegerVariable("6 6",asList(8)));
-        variables.add(new CBPIntegerVariable("7 6",asList(2)));
+        variables.add(new CBPVariable<Integer>("3 6",asList(6)));
+        variables.add(new CBPVariable<Integer>("4 6",asList(7)));
+        variables.add(new CBPVariable<Integer>("6 6",asList(8)));
+        variables.add(new CBPVariable<Integer>("7 6",asList(2)));
 
-        variables.add(new CBPIntegerVariable("3 7",asList(2)));
-        variables.add(new CBPIntegerVariable("4 7",asList(6)));
-        variables.add(new CBPIntegerVariable("6 7",asList(9)));
-        variables.add(new CBPIntegerVariable("7 7",asList(5)));
+        variables.add(new CBPVariable<Integer>("3 7",asList(2)));
+        variables.add(new CBPVariable<Integer>("4 7",asList(6)));
+        variables.add(new CBPVariable<Integer>("6 7",asList(9)));
+        variables.add(new CBPVariable<Integer>("7 7",asList(5)));
 
-        variables.add(new CBPIntegerVariable("1 8",asList(8)));
-        variables.add(new CBPIntegerVariable("4 8",asList(2)));
-        variables.add(new CBPIntegerVariable("6 8",asList(3)));
-        variables.add(new CBPIntegerVariable("9 8",asList(9)));
+        variables.add(new CBPVariable<Integer>("1 8",asList(8)));
+        variables.add(new CBPVariable<Integer>("4 8",asList(2)));
+        variables.add(new CBPVariable<Integer>("6 8",asList(3)));
+        variables.add(new CBPVariable<Integer>("9 8",asList(9)));
 
-        variables.add(new CBPIntegerVariable("3 9",asList(5)));
-        variables.add(new CBPIntegerVariable("5 9",asList(1)));
-        variables.add(new CBPIntegerVariable("7 9",asList(3)));
+        variables.add(new CBPVariable<Integer>("3 9",asList(5)));
+        variables.add(new CBPVariable<Integer>("5 9",asList(1)));
+        variables.add(new CBPVariable<Integer>("7 9",asList(3)));
 
         List<ConstraintWithVariables<Integer>> constraintWithVariables = new ArrayList<>();
 
@@ -234,7 +228,7 @@ public class Ac3AlgorithmTest {
             for (int j = 1; j < 10; j++) {
                 String variableName = String.valueOf(i) + " " + String.valueOf(j);
                 if (!variables.stream().map(CBPVariable::getVariableName).collect(Collectors.toList()).contains(variableName)) {
-                    variables.add(new CBPIntegerVariable(variableName, asList(1,2,3,4,5,6,7,8,9)));
+                    variables.add(new CBPVariable<Integer>(variableName, asList(1,2,3,4,5,6,7,8,9)));
                 }
             }
         }

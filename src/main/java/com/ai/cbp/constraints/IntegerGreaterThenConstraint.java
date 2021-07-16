@@ -1,7 +1,6 @@
 package com.ai.cbp.constraints;
 
 import com.ai.cbp.CBPConstraint;
-import com.ai.cbp.CBPVariable;
 
 import java.util.List;
 

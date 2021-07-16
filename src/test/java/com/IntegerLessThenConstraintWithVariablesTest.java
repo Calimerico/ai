@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 
-public class IntegerLessThenConstraintTest {
+public class IntegerLessThenConstraintWithVariablesTest {
 
     @Test
     public void test() {
