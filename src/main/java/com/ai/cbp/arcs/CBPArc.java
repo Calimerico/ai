@@ -21,18 +21,16 @@ public class CBPArc<T> {
         CBPVariable<T> firstVariable = variables.get(0);
         for (T domainValue: firstVariable.getDomain()) {
             firstVariable.assignDomainValue(domainValue);
-            boolean shouldRemoveDomain = shouldRemoveDomain(variables.subList(1, variables.size()));
+            boolean shouldRemoveDomain = shouldRemoveDomainValue(variables.subList(1, variables.size()));
             if (shouldRemoveDomain) {
                 variableDomainChanged = true;
-            }
-            if (shouldRemoveDomain) {
-                firstVariable.removeDomainValue(firstVariable.getAssignedValue());
+                firstVariable.removeAssignedDomainValue();
             }
         }
         return variableDomainChanged;
     }
 
-    private boolean shouldRemoveDomain(List<CBPVariable<T>> variables) {
+    private boolean shouldRemoveDomainValue(List<CBPVariable<T>> variables) {
         CBPVariable<T> currentVariable = variables.get(0);
         List<T> domainValues = currentVariable.getDomain();
 
@@ -50,7 +48,7 @@ public class CBPArc<T> {
             currentVariable.assignDomainValue(domainValue);
             boolean violated = constraint.violated(this.variables.stream().map(CBPVariable::getAssignedValue).limit(this.variables.size() - (variables.size() - 1)).collect(Collectors.toList()));
             if (!violated) {
-                boolean shouldRemoveDomainFromVariable = shouldRemoveDomain(variables.subList(1, variables.size()));
+                boolean shouldRemoveDomainFromVariable = shouldRemoveDomainValue(variables.subList(1, variables.size()));
                 if (!shouldRemoveDomainFromVariable) {
                     return false;
                 }

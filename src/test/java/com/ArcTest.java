@@ -15,14 +15,14 @@ public class ArcTest {
     @Test
     public void test() {
         //given
-        ArrayList<Integer> domainValues = new ArrayList<>();
-        domainValues.add(1);
-        domainValues.add(2);
-        domainValues.add(3);
-        CBPVariable<Integer> variableA = new CBPVariable<>("A", domainValues);
-        CBPVariable<Integer> variableB = new CBPVariable<>("B", domainValues);
-        variableA.removeDomainValue(1);
-        variableB.removeDomainValue(3);
+        ArrayList<Integer> domainValueA = new ArrayList<>();
+        domainValueA.add(2);
+        domainValueA.add(3);
+        ArrayList<Integer> domainValueB = new ArrayList<>();
+        domainValueB.add(1);
+        domainValueB.add(2);
+        CBPVariable<Integer> variableA = new CBPVariable<>("A", domainValueA);
+        CBPVariable<Integer> variableB = new CBPVariable<>("B", domainValueB);
         // a > b
         CBPArc<Integer> arc = new CBPArc<>(asList(variableA, variableB), new IntegerGreaterThenConstraint());
 

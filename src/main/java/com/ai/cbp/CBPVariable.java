@@ -17,8 +17,8 @@ public class CBPVariable<T> {
         return new ArrayList<>(domain);
     }
 
-    public void removeDomainValue(T value) {
-        domain.remove(value);
+    public void removeAssignedDomainValue() {
+        domain.remove(assignedValue);
     }
 
     public String getVariableName() {
