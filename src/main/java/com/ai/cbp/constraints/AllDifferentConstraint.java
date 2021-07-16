@@ -1,7 +1,5 @@
 package com.ai.cbp.constraints;
 
-import com.ai.cbp.CBPConstraint;
-
 import java.util.HashSet;
 import java.util.List;
 

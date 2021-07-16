@@ -1,4 +1,4 @@
-package com.ai.cbp;
+package com.ai.cbp.constraints;
 
 import java.util.List;
 

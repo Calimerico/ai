@@ -1,4 +1,4 @@
-package com.ai.cbp.arcs;
+package com.ai.cbp;
 
 import java.util.List;
 

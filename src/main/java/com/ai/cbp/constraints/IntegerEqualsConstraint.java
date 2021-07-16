@@ -1,7 +1,5 @@
 package com.ai.cbp.constraints;
 
-import com.ai.cbp.CBPConstraint;
-
 import java.util.List;
 
 public class IntegerEqualsConstraint implements CBPConstraint<Integer> {

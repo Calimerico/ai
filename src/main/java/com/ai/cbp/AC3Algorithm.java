@@ -1,8 +1,6 @@
 package com.ai.cbp;
 
 import com.ai.Algorithm;
-import com.ai.cbp.arcs.CBPArc;
-import com.ai.cbp.arcs.ConstraintWithVariables;
 
 import java.util.ArrayList;
 import java.util.List;

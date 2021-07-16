@@ -1,6 +1,6 @@
-package com.ai.cbp.arcs;
+package com.ai.cbp;
 
-import com.ai.cbp.CBPConstraint;
+import com.ai.cbp.constraints.CBPConstraint;
 import com.ai.cbp.CBPVariable;
 
 import java.util.List;
@@ -50,7 +50,7 @@ public class CBPArc<T> {
         return true;
     }
 
-    public boolean variableOnTheRightSide(String variableName) {
+    boolean variableOnTheRightSide(String variableName) {
         for (int i = 1; i < variables.size(); i++) {
             if (variables.get(i).getVariableName().equals(variableName)) {
                 return true;
@@ -59,7 +59,7 @@ public class CBPArc<T> {
         return false;
     }
 
-    public String getFirstVariableName() {
+    String getFirstVariableName() {
         return variables.get(0).getVariableName();
     }
 

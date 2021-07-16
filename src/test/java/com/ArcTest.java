@@ -1,7 +1,7 @@
 package com;
 
 import com.ai.cbp.CBPVariable;
-import com.ai.cbp.arcs.CBPArc;
+import com.ai.cbp.CBPArc;
 import com.ai.cbp.constraints.IntegerGreaterThenConstraint;
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,7 +1,6 @@
 package com;
 
 import com.ai.cbp.*;
-import com.ai.cbp.arcs.*;
 import com.google.common.collect.Lists;
 import com.sudoku.SudokuState;
 import org.junit.Assert;
@@ -10,8 +9,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static java.util.Arrays.asList;
 
 public class Ac3AlgorithmTest {
 
