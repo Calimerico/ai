@@ -34,7 +34,7 @@ public class SudokuState implements State {
         for (CBPVariable<Integer>[] row : sudokuVariables) {
             for (CBPVariable<Integer> variable : row) {
                 if (variable.getAssignedValue() == null) {
-                    variable.getDomain().getDomainValues().forEach(domainValue -> actions.add(new SudokuAction<>(variable.getVariableName(), domainValue.getValue())));
+                    variable.getDomain().forEach(domainValue -> actions.add(new SudokuAction<>(variable.getVariableName(), domainValue)));
                 }
                 return actions;
             }

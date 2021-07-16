@@ -1,7 +1,6 @@
 package com.ai.cbp.arcs;
 
 import com.ai.cbp.CBPConstraint;
-import com.ai.cbp.CBPDomainValue;
 import com.ai.cbp.CBPVariable;
 
 import java.util.List;
@@ -20,8 +19,8 @@ public class CBPArc<T> {
     public boolean execute() {
         boolean variableDomainChanged = false;
         CBPVariable<T> firstVariable = variables.get(0);
-        for (CBPDomainValue<T> domainValue: firstVariable.getDomain().getDomainValues()) {
-            firstVariable.assignDomainValue(domainValue.getValue());
+        for (T domainValue: firstVariable.getDomain()) {
+            firstVariable.assignDomainValue(domainValue);
             boolean shouldRemoveDomain = shouldRemoveDomain(variables.subList(1, variables.size()));
             if (shouldRemoveDomain) {
                 variableDomainChanged = true;
@@ -35,14 +34,11 @@ public class CBPArc<T> {
 
     private boolean shouldRemoveDomain(List<CBPVariable<T>> variables) {
         CBPVariable<T> currentVariable = variables.get(0);
-        List<CBPDomainValue<T>> domainValues = currentVariable.getDomain().getDomainValues();
-//        if (variables.isEmpty()) {
-//            return true;
-//        }
+        List<T> domainValues = currentVariable.getDomain();
 
         if (variables.size() == 1) {
-            for (CBPDomainValue<T> domainValue : domainValues) {
-                currentVariable.assignDomainValue(domainValue.getValue());
+            for (T domainValue : domainValues) {
+                currentVariable.assignDomainValue(domainValue);
                 boolean violated = constraint.violated(this.variables.stream().map(CBPVariable::getAssignedValue).collect(Collectors.toList()));
                 if (!violated) {
                     return false;
@@ -50,8 +46,8 @@ public class CBPArc<T> {
             }
             return true;
         }
-        for (CBPDomainValue<T> domainValue : domainValues) {
-            currentVariable.assignDomainValue(domainValue.getValue());
+        for (T domainValue : domainValues) {
+            currentVariable.assignDomainValue(domainValue);
             boolean violated = constraint.violated(this.variables.stream().map(CBPVariable::getAssignedValue).limit(this.variables.size() - (variables.size() - 1)).collect(Collectors.toList()));
             if (!violated) {
                 boolean shouldRemoveDomainFromVariable = shouldRemoveDomain(variables.subList(1, variables.size()));

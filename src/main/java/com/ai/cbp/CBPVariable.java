@@ -1,30 +1,24 @@
 package com.ai.cbp;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 public class CBPVariable<T> {
-    private final CBPDomain<T> domain;
+    private final List<T> domain;
     private final String variableName;
     private T assignedValue;
 
-    public CBPVariable(String variableName, List<T> domainValues) {
+    public CBPVariable(String variableName, List<T> domain) {
         this.variableName = variableName;
-        domain = new CBPDomain<T>(domainValues);
+        this.domain = new ArrayList<>(domain);
     }
 
-    public CBPVariable(String variableName, List<T> domainValues, T assignedValue) {
-        this(variableName, domainValues);
-        this.assignedValue = assignedValue;
-    }
-
-    public CBPDomain<T> getDomain() {
-        return domain;
+    public List<T> getDomain() {
+        return new ArrayList<>(domain);
     }
 
     public void removeDomainValue(T value) {
-        domain.removeDomainValue(value);
+        domain.remove(value);
     }
 
     public String getVariableName() {
@@ -40,10 +34,11 @@ public class CBPVariable<T> {
     }
 
     public CBPVariable<T> deepCopy() {
-        return new CBPVariable<T>(
+        CBPVariable<T> variable = new CBPVariable<T>(
                 variableName,
-                domain.getDomainValues().stream().map(CBPDomainValue::getValue).collect(toList()),
-                assignedValue
+                new ArrayList<>(domain)
         );
+        variable.assignDomainValue(this.assignedValue);
+        return variable;
     }
 }
