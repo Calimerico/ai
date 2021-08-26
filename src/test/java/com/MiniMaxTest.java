@@ -10,7 +10,8 @@ public class MiniMaxTest {
 
     @Test
     public void chessTest() {
-        MiniMax miniMax = new MiniMax(new BreakTest());
+        //todo wtf sta radi ovaj test
+        MiniMax miniMax = new MiniMax(new BreakTest(6));
         HashSet<Action> actionList = new HashSet<>();
         actionList.add(new DummyAction(1));
         actionList.add(new DummyAction(-1));
