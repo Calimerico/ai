@@ -1,18 +1,17 @@
 package com.ai;
 
-import com.romania.RomaniaState;
-
-import java.util.*;
-
 public class MiniMax {
 
     private final BreakTest breakTest;
+    private final ZobristHashing zobristHashing;
 
-    public MiniMax(BreakTest breakTest) {
+    public MiniMax(BreakTest breakTest, ZobristHashing zobristHashing) {
         this.breakTest = breakTest;
+        this.zobristHashing = zobristHashing;
     }
 
     public Action search(MiniMaxState state) {
+        zobristHashing.initializeZobristValues(state);
         return search(state, breakTest.getDepth());
     }
 
@@ -43,8 +42,14 @@ public class MiniMax {
     }
 
     private double max(MiniMaxState state, int depth, double alpha, double beta) {
+        Double zobristValue = zobristHashing.getCachedValue(state);
+        if (zobristValue != null) {
+            return zobristValue;
+        }
         if (breakTest.shouldEvaluate(state, depth)) {
-            return state.getHeuristicFunction();
+            double eval = state.getHeuristicFunction();
+            zobristHashing.saveIntoCache(state, eval);
+            return eval;
         }
         double max = -1_000_000;
         for (Action action : state.getActions()) {
@@ -59,8 +64,14 @@ public class MiniMax {
     }
 
     private double min(MiniMaxState state, int depth, double alpha, double beta) {
+        Double zobristValue = zobristHashing.getCachedValue(state);
+        if (zobristValue != null) {
+            return zobristValue;
+        }
         if (breakTest.shouldEvaluate(state, depth)) {
-            return state.getHeuristicFunction();
+            double eval = state.getHeuristicFunction();
+            zobristHashing.saveIntoCache(state, eval);
+            return eval;
         }
         double min = 1_000_000;
         for (Action action : state.getActions()) {
