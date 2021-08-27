@@ -42,13 +42,13 @@ public class MiniMax {
     }
 
     private double max(MiniMaxState state, int depth, double alpha, double beta) {
-        Double zobristValue = zobristHashing.getCachedValue(state);
+        Float zobristValue = zobristHashing.getCachedValue(state);
         if (zobristValue != null) {
             return zobristValue;
         }
         if (breakTest.shouldEvaluate(state, depth)) {
             double eval = state.getHeuristicFunction();
-            zobristHashing.saveIntoCache(state, eval);
+            zobristHashing.saveIntoCache(state, (float) eval);
             return eval;
         }
         double max = -1_000_000;
@@ -64,13 +64,13 @@ public class MiniMax {
     }
 
     private double min(MiniMaxState state, int depth, double alpha, double beta) {
-        Double zobristValue = zobristHashing.getCachedValue(state);
+        Float zobristValue = zobristHashing.getCachedValue(state);
         if (zobristValue != null) {
             return zobristValue;
         }
         if (breakTest.shouldEvaluate(state, depth)) {
             double eval = state.getHeuristicFunction();
-            zobristHashing.saveIntoCache(state, eval);
+            zobristHashing.saveIntoCache(state, (float) eval);
             return eval;
         }
         double min = 1_000_000;
