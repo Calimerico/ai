@@ -95,11 +95,6 @@ public class EightQueensState implements State {
     }
 
     @Override
-    public State deepCopy() {
-        return null;//todo
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

@@ -61,17 +61,6 @@ public class SudokuState implements State {
         return 0;
     }
 
-    @Override
-    public State deepCopy() {
-        CBPVariable<Integer>[][] sudokuVariables = new CBPVariable[9][9];
-        for (int i =0 ; i < sudokuVariables.length ; i++) {
-            for (int j =0 ; j < sudokuVariables.length ; j++) {
-                sudokuVariables[i][j] = this.sudokuVariables[i][j].deepCopy();
-            }
-        }
-        return new SudokuState(sudokuVariables);
-    }
-
     public void print() {
         for (CBPVariable<Integer>[] row : sudokuVariables) {
             for (CBPVariable<Integer> data : row) {
