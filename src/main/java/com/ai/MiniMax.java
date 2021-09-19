@@ -23,19 +23,29 @@ public class MiniMax {
             double max = -1_000_000;
             for (Action action : state.getActions()) {
                 double eval = min(((MiniMaxState) state.newState(action)), depth - 1, alpha, beta);
+                alpha = Math.max(alpha, eval);
                 if (eval > max) {
                     max = eval;
                     act = action;
                 }
+                if (max >= beta) {
+                    return action;
+                }
+
             }
         } else {
             double min = 1_000_000;
             for (Action action : state.getActions()) {
                 double eval = max(((MiniMaxState) state.newState(action)), depth - 1, alpha, beta);
+                beta = Math.min(beta, eval);
                 if (eval < min) {
                     min = eval;
                     act = action;
                 }
+                if (min <= alpha) {
+                    return action;
+                }
+
             }
         }
         return act;
